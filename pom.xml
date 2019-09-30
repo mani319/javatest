@@ -17,6 +17,20 @@
             <version>2.10.1</version>
         </dependency>
 
+        <!-- Rate limiter Dependency - Guava from Google -->
+        <!--https://google.github.io/guava/releases/22.0/api/docs/com/google/common/util/concurrent/RateLimiter.html-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>22.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-core</artifactId>
+            <groupId>org.springframework</groupId>
+            <version>4.2.3.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
