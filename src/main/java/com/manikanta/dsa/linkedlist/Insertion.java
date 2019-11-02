@@ -5,14 +5,14 @@ package com.manikanta.dsa.linkedlist;
  */
 public class Insertion {
 
-    private Node head;
+    private ListNode head;
 
-    class Node {
+    class ListNode {
 
         Integer data;
-        Node next;
+        ListNode next;
 
-        Node(Integer data) {
+        ListNode(Integer data) {
             this.data = data;
             this.next = null;
         }
@@ -21,7 +21,7 @@ public class Insertion {
 
     public void insertAtBeginning(Integer value) {
 
-        Node new_node = new Node(value);
+        ListNode new_node = new ListNode(value);
 
         new_node.next = head;
         head = new_node;
@@ -31,13 +31,13 @@ public class Insertion {
     public void insertAtEnd(Integer value) {
 
         if (null == head) {
-            head = new Node(value);
+            head = new ListNode(value);
             return;
         }
 
-        Node new_node = new Node(value);
+        ListNode new_node = new ListNode(value);
 
-        Node last = head;
+        ListNode last = head;
         while (null != last.next) {
             last = last.next;
         }
@@ -46,14 +46,14 @@ public class Insertion {
     }
 
 
-    public void insertAfterNode(Node prevNode, Integer value) {
+    public void insertAfterNode(ListNode prevNode, Integer value) {
 
         if (null == prevNode) {
             System.out.println("previous node can't be null");
             return;
         }
 
-        Node new_node = new Node(value);
+        ListNode new_node = new ListNode(value);
         new_node.next = prevNode.next;
         prevNode.next = new_node;
     }
@@ -61,7 +61,7 @@ public class Insertion {
 
     public void printList()
     {
-        Node tnode = head;
+        ListNode tnode = head;
         while (tnode != null)
         {
             System.out.print(tnode.data+" ");
