@@ -7,7 +7,7 @@ import com.manikanta.dsa.linkedlist.LinkedList.Node;
  */
 public class Reverse {
 
-    private static Node reverseWhole(Node head) {
+    private Node reverseWhole(Node head) {
 
         Node prev = null;
         Node curr = head;
@@ -25,7 +25,7 @@ public class Reverse {
     }
 
 
-    private static Node reverseInBatches(Node head, int batchSize) {
+    private Node reverseInBatches(Node head, int batchSize) {
 
         Node prev = null;
         Node curr = head;
@@ -51,6 +51,8 @@ public class Reverse {
 
 
     public static void main(String[] args) {
+        Reverse reverse = new Reverse();
+
         LinkedList list = new LinkedList();
         list.head = new Node(85);
         list.head.next = new Node(15);
@@ -61,13 +63,15 @@ public class Reverse {
         System.out.println("Given Linked list");
         list.printList(list.head);
 
-        list.head = reverseWhole(list.head);
-
+        list.head = reverse.reverseWhole(list.head);
         System.out.println("Reversed linked list ");
         list.printList(list.head);
-        list.head = reverseWhole(list.head);
 
-        list.head = reverseInBatches(list.head, 3);
+        System.out.println("Reversed again to get original list ");
+        list.head = reverse.reverseWhole(list.head);
+        list.printList(list.head);
+
+        list.head = reverse.reverseInBatches(list.head, 3);
         System.out.println("Reversed linked list in batches ");
         list.printList(list.head);
     }
