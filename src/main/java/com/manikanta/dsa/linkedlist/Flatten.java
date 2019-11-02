@@ -14,8 +14,10 @@ public class Flatten {
             return head;
         }
 
+        // Recursively flatten all the next nodes
         head.next = flattenSingleLevel(head.next);
 
+        // Merge current and next sorted lists using down
         head = merge.sortedMergeDown(head, head.next);
 
         return head;

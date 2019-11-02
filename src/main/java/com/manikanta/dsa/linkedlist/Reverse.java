@@ -7,7 +7,7 @@ import com.manikanta.dsa.linkedlist.LinkedList.Node;
  */
 public class Reverse {
 
-    private Node reverseWhole(Node head) {
+    Node reverseWhole(Node head) {
 
         Node prev = null;
         Node curr = head;

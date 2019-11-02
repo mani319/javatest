@@ -71,4 +71,13 @@ public class LinkedList {
         }
         System.out.println();
     }
+
+    int getsize(Node head) {
+        int count = 0;
+        while (head != null) {
+            count++;
+            head = head.next;
+        }
+        return count;
+    }
 }
