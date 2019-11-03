@@ -12,32 +12,36 @@ public class SubsetsWithPerfectSum {
 
     private static void printSubsets(int arr[], int n, int sum) {
 
-        dp = new boolean[n][sum + 1];
+        dp = new boolean[n+1][sum + 1];
+
+        // Nothing can be achieved using 0 elements
+        for (int j = 0; j < sum+1; j++) {
+            dp[0][j] = false;
+        }
 
         // 0 sum can be achieved with any number of elements
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n+1; i++) {
             dp[i][0] = true;
         }
 
-        // Sum arr[0] can be achieved with single element
-        if (arr[0] <= sum) {
-            dp[0][arr[0]] = true;
-        }
+        for (int i = 1; i < n+1; i++) {
+            for (int j = 1; j < sum+1; j++) {
 
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j <= sum; j++) {
-
-                dp[i][j] = (arr[i] <= j) ? (dp[i - 1][j] || dp[i-1][j - arr[i]]) : dp[i - 1][j];
+                dp[i][j] = (arr[i-1] <= j)
+                        ? dp[i - 1][j] || dp[i-1][j - arr[i-1]]
+                        : dp[i - 1][j];
             }
         }
 
-        printDPArray(n, sum);
+        printDPArray(n+1, sum+1);
 
         // To find whether exact sum can be extracted or not - get dp[n-1][sum]
-        if (dp[n-1][sum]) {
+        if (dp[n][sum]) {
             System.out.println("Exact sum can be found");
             ArrayList<Integer> p = new ArrayList<>();
-            printSubsetsRec(arr, n-1, sum, p);
+            printSubsetsRec(arr, n, sum, p);
+        } else {
+            System.out.println("Exact sum can't be found :( ");
         }
     }
 
@@ -66,9 +70,9 @@ public class SubsetsWithPerfectSum {
         }
 
         // Sum is reached after including this element - Got to previous row by decreasing current element value
-        if (arr[i] <= sum && dp[i - 1][sum - arr[i]]) {
-            p.add(arr[i]);
-            printSubsetsRec(arr, i-1, sum - arr[i], p);
+        if (arr[i-1] <= sum && dp[i-1][sum-arr[i-1]]) {
+            p.add(arr[i-1]);
+            printSubsetsRec(arr, i-1, sum-arr[i-1], p);
         }
     }
 
@@ -76,7 +80,7 @@ public class SubsetsWithPerfectSum {
     private static void printDPArray(int n, int sum) {
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j <= sum; j++) {
+            for (int j = 0; j < sum; j++) {
                 System.out.print(dp[i][j] + " ");
             }
             System.out.println();
