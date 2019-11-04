@@ -35,7 +35,7 @@ public class SubsetsWithPerfectSum {
 
         printDPArray(n+1, sum+1);
 
-        // To find whether exact sum can be extracted or not - get dp[n-1][sum]
+        // To find whether exact sum can be extracted or not - get dp[n][sum]
         if (dp[n][sum]) {
             System.out.println("Exact sum can be found");
             ArrayList<Integer> p = new ArrayList<>();
