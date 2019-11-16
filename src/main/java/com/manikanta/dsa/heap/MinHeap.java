@@ -2,8 +2,6 @@ package com.manikanta.dsa.heap;
 
 import com.manikanta.dsa.MiscUtil;
 
-import java.util.Collections;
-
 /**
  * Created by Manikanta Tummalapenta on 17 Nov 2019
  */
@@ -13,9 +11,9 @@ public class MinHeap {
     int capacity;
 
     public MinHeap(int[] arr, int heapSize) {
-        harr = arr;
-        heapSize = heapSize;
-        capacity = heapSize;
+        this.harr = arr;
+        this.heapSize = heapSize;
+        this.capacity = heapSize;
 
         for (int i = (heapSize - 1) / 2; i >= 0; i--) {
             heapify(i);
@@ -23,17 +21,17 @@ public class MinHeap {
     }
 
     int extractMin() {
-        if (heapSize <= 0)
+        if (this.heapSize <= 0)
             return -1;
 
-        if (1 == heapSize) {
-            heapSize--;
-            return harr[0];
+        if (1 == this.heapSize) {
+            this.heapSize--;
+            return this.harr[0];
         }
 
-        int min = harr[0];
-        harr[0] = harr[heapSize - 1];
-        heapSize--;
+        int min = this.harr[0];
+        this.harr[0] = this.harr[this.heapSize - 1];
+        this.heapSize--;
 
         heapify(0);
 
@@ -45,28 +43,28 @@ public class MinHeap {
         int r = right(i);
         int min = i;
 
-        if (l < heapSize && harr[l] < harr[i])
+        if (l < this.heapSize && this.harr[l] < this.harr[i])
             min = l;
-        if (r < heapSize && harr[r] < harr[i])
+        if (r < this.heapSize && this.harr[r] < this.harr[min])
             min = r;
 
         if (min != i) {
-            MiscUtil.swap(harr, i, min);
+            MiscUtil.swap(this.harr, i, min);
             heapify(min);
         }
     }
 
     void insert(int value) {
-        if (heapSize == capacity) {
+        if (this.heapSize == this.capacity) {
             return;
         }
 
-        int i = heapSize - 1;
-        harr[i] = value;
-        heapSize++;
+        this.heapSize++;
+        int i = this.heapSize - 1;
+        this.harr[i] = value;
 
-        while (i != 0 && harr[parent(i)] > harr[i]) {
-            MiscUtil.swap(harr, i, parent(i));
+        while (i != 0 && this.harr[parent(i)] > this.harr[i]) {
+            MiscUtil.swap(this.harr, i, parent(i));
             i = parent(i);
         }
     }
@@ -81,5 +79,17 @@ public class MinHeap {
 
     int parent(int i) {
         return (i - 1) / 2;
+    }
+
+    public int[] getHarr() {
+        return this.harr;
+    }
+
+    public int getHeapSize() {
+        return this.heapSize;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
     }
 }
