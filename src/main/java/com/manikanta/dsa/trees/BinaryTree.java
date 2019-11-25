@@ -12,11 +12,13 @@ public class BinaryTree {
         public Node left;
         public Node right;
         public Integer hd; // Used for Top and Bottom View
+        public Node nextRight;
 
         public Node(Integer data) {
             this.data = data;
             this.left = this.right = null;
-            this.hd = Integer.MAX_VALUE;;
+            this.hd = Integer.MAX_VALUE;
+            this.nextRight = null;
         }
     }
 
