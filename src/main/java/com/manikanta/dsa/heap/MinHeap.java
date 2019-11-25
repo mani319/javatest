@@ -54,6 +54,22 @@ public class MinHeap {
         }
     }
 
+    void heapify(int heapSize, int i) {
+        int l = left(i);
+        int r = right(i);
+        int min = i;
+
+        if (l < heapSize && this.harr[l] < this.harr[i])
+            min = l;
+        if (r < heapSize && this.harr[r] < this.harr[min])
+            min = r;
+
+        if (min != i) {
+            MiscUtil.swap(this.harr, i, min);
+            heapify(heapSize, min);
+        }
+    }
+
     void insert(int value) {
         if (this.heapSize == this.capacity) {
             return;

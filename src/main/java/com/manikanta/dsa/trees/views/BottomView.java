@@ -1,5 +1,8 @@
 package com.manikanta.dsa.trees.views;
 
+import com.manikanta.dsa.trees.BinaryTree;
+import com.manikanta.dsa.trees.BinaryTree.*;
+
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -8,72 +11,46 @@ import java.util.TreeMap;
 /**
  * Created by Manikanta Tummalapenta on 14 Mar 2019
  */
-class Node {
-    Integer data;
-    Integer hd;
-    Node left, right;
+public class BottomView {
 
-    Node(Integer data) {
-        this.data = data;
-        this.hd = Integer.MAX_VALUE;
-        this.left = this.right = null;
-    }
-}
-
-
-class BinaryTree {
-
-    private Node root;
-
-    BinaryTree() {
-    }
-
-    BinaryTree(Node root) {
-        this.root = root;
-    }
-
-    public void bottomView() {
+    public void bottomView(Node root) {
         if (null == root) {
             return;
         }
 
         Integer hd = 0;
-
+        // This is a tree map - This stores in the natural ordering of keys
         Map<Integer, Integer> hdToDataMap = new TreeMap<>();
-        Queue<Node> levelOrderQueue = new LinkedList<>();
+        Queue<Node> q = new LinkedList<>();
 
         root.hd = hd;
-        levelOrderQueue.add(root);
+        q.add(root);
 
-        while (!levelOrderQueue.isEmpty()) {
+        while (!q.isEmpty()) {
 
-            Node temp = levelOrderQueue.remove();
+            Node temp = q.remove();
             hd = temp.hd;
 
             hdToDataMap.put(hd, temp.data);
 
             if (null != temp.left) {
                 temp.left.hd = hd-1;
-                levelOrderQueue.add(temp.left);
+                q.add(temp.left);
             }
 
             if (null != temp.right) {
                 temp.right.hd = hd+1;
-                levelOrderQueue.add(temp.right);
+                q.add(temp.right);
             }
         }
-
 
         for (Map.Entry<Integer, Integer> entry : hdToDataMap.entrySet()) {
             System.out.print(entry.getValue() + " ");
         }
     }
-}
-
-
-public class BottomView {
 
     public static void main(String[] args) {
+        BottomView bottomView = new BottomView();
 
         /* Tree 1 */
         Node root1 = new Node(20);
@@ -88,8 +65,8 @@ public class BottomView {
 
         BinaryTree binaryTree1 = new BinaryTree(root1);
         System.out.println("Bottom view of tree 1 is: ");
-        binaryTree1.bottomView();
-
+        bottomView.bottomView(binaryTree1.getRoot());
+        System.out.println();
 
         /* Tree 2 */
         Node root2 = new Node(1);
@@ -101,6 +78,19 @@ public class BottomView {
 
         BinaryTree binaryTree2 = new BinaryTree(root2);
         System.out.println("Bottom view of tree 2 is: ");
-        binaryTree2.bottomView();
+        bottomView.bottomView(binaryTree2.getRoot());
+        System.out.println();
+
+        /* Tree 3 */
+        Node root3 = new Node(20);
+        root3.left = new Node(8);
+        root3.right = new Node(22);
+        root3.left.left = new Node(5);
+        root3.right.right = new Node(25);
+
+        BinaryTree binaryTree3 = new BinaryTree(root3);
+        System.out.println("Bottom view of tree 3 is: ");
+        bottomView.bottomView(binaryTree3.getRoot());
+        System.out.println();
     }
 }
