@@ -5,7 +5,7 @@ package com.manikanta.dsa.trees;
  */
 public class BinaryTree {
 
-    Node root;
+    public Node root;
 
     public static class Node {
         public Integer data;

@@ -1,5 +1,6 @@
-package com.manikanta.dsa.trees;
+package com.manikanta.dsa.trees.check;
 
+import com.manikanta.dsa.trees.BinaryTree;
 import com.manikanta.dsa.trees.BinaryTree.*;
 
 /**
@@ -14,7 +15,6 @@ public class CheckBST {
                 (null == r || r.data > root.data) &&
                 isBST1(root.left, l, root) &&
                 isBST1(root.right, root, r);
-
     }
 
     private Node prev = null;
@@ -25,6 +25,7 @@ public class CheckBST {
         return isBST2Util(root);
     }
 
+    // Level order traversal with prev node
     private boolean isBST2Util(Node root) {
         if (null == root)
             return true;
