@@ -25,7 +25,7 @@ public class CheckBST {
         return isBST2Util(root);
     }
 
-    // Level order traversal with prev node
+    // Inorder order traversal with prev node
     private boolean isBST2Util(Node root) {
         if (null == root)
             return true;

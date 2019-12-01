@@ -20,6 +20,14 @@ public class BinaryTree {
             this.hd = Integer.MAX_VALUE;
             this.nextRight = null;
         }
+
+        public boolean isLeafNode() {
+            return this.left == null && this.right == null;
+        }
+
+        public boolean isFullParent() {
+            return this.left != null && this.right != null;
+        }
     }
 
     public BinaryTree() {
