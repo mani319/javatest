@@ -13,14 +13,6 @@ public class MaxPathSum {
         Integer result;
     }
 
-    // Ref - https://www.geeksforgeeks.org/find-maximum-path-sum-two-leaves-binary-tree/
-    private Integer leafToLeaf(Node root) {
-        Res res = new Res();
-        res.result = Integer.MIN_VALUE;
-        leafToLeafUtil(root, res);
-        return res.result;
-    }
-
     private Integer leafToLeafUtil(Node root, Res res) {
         if (null == root) {
             return 0;
@@ -40,8 +32,43 @@ public class MaxPathSum {
         return root.left == null ? rightSum + root.data : leftSum + root.data;
     }
 
-    private void anyToAnyNode() {
+    private Integer anyToAnyNodeUtil(Node root, Res res) {
+        if (null == root) {
+            return 0;
+        }
 
+        Integer leftSum = anyToAnyNodeUtil(root.left, res);
+        Integer rightSum = anyToAnyNodeUtil(root.right, res);
+
+        // Max path for parent call of root. This path must
+        // include at-most one child of root
+        int maxSingle = Math.max(Math.max(leftSum, rightSum) + root.data, root.data);
+
+        // Max Top represents the sum when the Node under
+        // consideration is the root of the max sum path and no
+        // ancestors of root are there in max sum path
+        int maxTop = Math.max(maxSingle, leftSum + rightSum + root.data);
+
+        // Store the Maximum Result.
+        res.result = Math.max(res.result, maxTop);
+
+        return maxSingle;
+    }
+
+    // Ref - https://www.geeksforgeeks.org/find-maximum-path-sum-two-leaves-binary-tree/
+    private Integer leafToLeaf(Node root) {
+        Res res = new Res();
+        res.result = Integer.MIN_VALUE;
+        leafToLeafUtil(root, res);
+        return res.result;
+    }
+
+    // Ref - https://www.geeksforgeeks.org/find-maximum-path-sum-in-a-binary-tree/
+    private Integer anyToAnyNode(Node root) {
+        Res res = new Res();
+        res.result = Integer.MIN_VALUE;
+        anyToAnyNodeUtil(root, res);
+        return res.result;
     }
 
     public static void main(String[] args) {
@@ -63,5 +90,17 @@ public class MaxPathSum {
         tree.root.right.right.right.right.left = new Node(10);
         System.out.println("Max pathSum of the given binary tree is "
                 + maxPathSum.leafToLeaf(tree.root));
+
+        BinaryTree tree1 = new BinaryTree();
+        tree1.root = new Node(10);
+        tree1.root.left = new Node(2);
+        tree1.root.right = new Node(10);
+        tree1.root.left.left = new Node(20);
+        tree1.root.left.right = new Node(1);
+        tree1.root.right.right = new Node(-25);
+        tree1.root.right.right.left = new Node(3);
+        tree1.root.right.right.right = new Node(4);
+        System.out.println("Max pathSum of the given binary tree is "
+                + maxPathSum.anyToAnyNode(tree1.root));
     }
 }
