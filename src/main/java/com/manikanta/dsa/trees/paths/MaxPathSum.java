@@ -32,6 +32,7 @@ public class MaxPathSum {
         return root.left == null ? rightSum + root.data : leftSum + root.data;
     }
 
+    // TODO: Understand this
     private Integer anyToAnyNodeUtil(Node root, Res res) {
         if (null == root) {
             return 0;
