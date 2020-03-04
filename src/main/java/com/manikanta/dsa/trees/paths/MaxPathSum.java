@@ -1,7 +1,7 @@
 package com.manikanta.dsa.trees.paths;
 
 import com.manikanta.dsa.trees.BinaryTree;
-import com.manikanta.dsa.trees.BinaryTree.*;
+import com.manikanta.dsa.trees.BinaryTree.Node;
 
 /**
  * Created by Manikanta Tummalapenta on 02 Dec 2019
@@ -26,34 +26,32 @@ public class MaxPathSum {
 
         if (root.isFullParent()) {
             res.result = Math.max(res.result, leftSum + rightSum + root.data);
-            return Math.max(leftSum, rightSum) + root.data;
         }
 
-        return root.left == null ? rightSum + root.data : leftSum + root.data;
+        return Math.max(leftSum, rightSum) + root.data;
     }
 
-    // TODO: Understand this
     private Integer anyToAnyNodeUtil(Node root, Res res) {
         if (null == root) {
             return 0;
         }
 
+        if (root.isLeafNode()) {
+            return root.data;
+        }
+
         Integer leftSum = anyToAnyNodeUtil(root.left, res);
         Integer rightSum = anyToAnyNodeUtil(root.right, res);
 
-        // Max path for parent call of root. This path must
-        // include at-most one child of root
-        int maxSingle = Math.max(Math.max(leftSum, rightSum) + root.data, root.data);
+        Integer a = root.data;
+        Integer b = Math.max(leftSum, rightSum) + root.data;
+        Integer c = leftSum + rightSum + root.data;
 
-        // Max Top represents the sum when the Node under
-        // consideration is the root of the max sum path and no
-        // ancestors of root are there in max sum path
-        int maxTop = Math.max(maxSingle, leftSum + rightSum + root.data);
-
+        int maxSum = Math.max(Math.max(a, b), c);
         // Store the Maximum Result.
-        res.result = Math.max(res.result, maxTop);
+        res.result = Math.max(res.result, maxSum);
 
-        return maxSingle;
+        return Math.max(a, b);
     }
 
     // Ref - https://www.geeksforgeeks.org/find-maximum-path-sum-two-leaves-binary-tree/

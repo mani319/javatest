@@ -10,6 +10,9 @@ public class CheckBST {
 
     private boolean isBST1(Node root, Node l, Node r) {
 
+        // IMP:- Observe the recursion conditions
+        // This traverses down the tree keeping track of the
+        // narrowing min and max allowed values as it goes, looking at each node only once.
         return null == root ||
                 (null == l || l.data < root.data) &&
                 (null == r || r.data > root.data) &&
