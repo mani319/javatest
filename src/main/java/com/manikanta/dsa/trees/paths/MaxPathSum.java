@@ -3,6 +3,8 @@ package com.manikanta.dsa.trees.paths;
 import com.manikanta.dsa.trees.BinaryTree;
 import com.manikanta.dsa.trees.BinaryTree.Node;
 
+import java.util.stream.Stream;
+
 /**
  * Created by Manikanta Tummalapenta on 02 Dec 2019
  */
@@ -47,9 +49,8 @@ public class MaxPathSum {
         Integer b = Math.max(leftSum, rightSum) + root.data;
         Integer c = leftSum + rightSum + root.data;
 
-        int maxSum = Math.max(Math.max(a, b), c);
         // Store the Maximum Result.
-        res.result = Math.max(res.result, maxSum);
+        res.result = Stream.of(res.result, a, b, c).max(Integer::compareTo).get();
 
         return Math.max(a, b);
     }

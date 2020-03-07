@@ -1,4 +1,4 @@
-package com.manikanta.dsa.trees.construct;
+package com.manikanta.dsa.trees.convert;
 
 import com.manikanta.dsa.trees.BinaryTree;
 import com.manikanta.dsa.trees.BinaryTree.*;

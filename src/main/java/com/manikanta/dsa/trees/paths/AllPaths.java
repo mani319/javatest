@@ -2,6 +2,10 @@ package com.manikanta.dsa.trees.paths;
 
 import com.manikanta.dsa.trees.BinaryTree.*;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Manikanta Tummalapenta on 01 Dec 2019
  */
@@ -15,13 +19,31 @@ public class AllPaths {
         arr[pathLen] = root.data;
         pathLen++;
 
-        if (null == root.left && null == root.right) {
+        if (root.isLeafNode()) {
             printArray(arr, pathLen);
             return;
         }
 
         printAllPaths(root.left, arr, pathLen);
         printAllPaths(root.right, arr, pathLen);
+    }
+
+    private void printAllPaths2(Node root, List<Integer> currNodes) {
+        if (null == root) {
+            return;
+        }
+
+        currNodes.add(root.data);
+
+        if (root.isLeafNode()) {
+            System.out.println(currNodes);
+        } else {
+            printAllPaths2(root.left, currNodes);
+            printAllPaths2(root.right, currNodes);
+        }
+
+        // Back tracking move
+        currNodes.remove(currNodes.size() - 1);
     }
 
     private void printArray(Integer ints[], Integer len) {
@@ -41,6 +63,7 @@ public class AllPaths {
         root.left.right = new Node(5);
 
         allPaths.printAllPaths(root, new Integer[1000], 0);
+        allPaths.printAllPaths2(root, new ArrayList<>());
 
         System.out.println("**************");
 
@@ -59,5 +82,6 @@ public class AllPaths {
         root1.right.right.right.right = new Node(13);
 
         allPaths.printAllPaths(root1, new Integer[1000], 0);
+        allPaths.printAllPaths2(root1, new ArrayList<>());
     }
 }

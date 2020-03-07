@@ -49,6 +49,41 @@ public class BottomView {
         }
     }
 
+    class NewNode {
+        Integer data;
+        Integer level;
+
+        NewNode(Integer data, Integer level) {
+            this.data = data;
+            this.level = level;
+        }
+    }
+
+    public void bottomView2(Node root) {
+        Map<Integer, NewNode> hdToDataMap = new TreeMap<>();
+        bottomView2(root, 0, 0, hdToDataMap);
+
+        for (Map.Entry<Integer, NewNode> entry : hdToDataMap.entrySet()) {
+            System.out.print(entry.getValue().data + " ");
+        }
+    }
+
+    private void bottomView2(Node root, Integer hd, Integer currLevel, Map<Integer, NewNode> hdToDataMap) {
+
+        if (null == root) {
+            return;
+        }
+
+        if (!hdToDataMap.containsKey(hd) ||
+                hdToDataMap.get(hd).level <= currLevel) {
+
+            hdToDataMap.put(hd, new NewNode(root.data, currLevel));
+        }
+
+        bottomView2(root.left, hd - 1, currLevel + 1, hdToDataMap);
+        bottomView2(root.right, hd + 1, currLevel + 1, hdToDataMap);
+    }
+
     public static void main(String[] args) {
         BottomView bottomView = new BottomView();
 
@@ -67,6 +102,8 @@ public class BottomView {
         System.out.println("Bottom view of tree 1 is: ");
         bottomView.bottomView(binaryTree1.getRoot());
         System.out.println();
+        bottomView.bottomView2(binaryTree1.getRoot());
+        System.out.println();
 
         /* Tree 2 */
         Node root2 = new Node(1);
@@ -80,6 +117,8 @@ public class BottomView {
         System.out.println("Bottom view of tree 2 is: ");
         bottomView.bottomView(binaryTree2.getRoot());
         System.out.println();
+        bottomView.bottomView2(binaryTree2.getRoot());
+        System.out.println();
 
         /* Tree 3 */
         Node root3 = new Node(20);
@@ -91,6 +130,8 @@ public class BottomView {
         BinaryTree binaryTree3 = new BinaryTree(root3);
         System.out.println("Bottom view of tree 3 is: ");
         bottomView.bottomView(binaryTree3.getRoot());
+        System.out.println();
+        bottomView.bottomView2(binaryTree3.getRoot());
         System.out.println();
     }
 }
