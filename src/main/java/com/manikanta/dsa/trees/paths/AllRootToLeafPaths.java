@@ -3,13 +3,12 @@ package com.manikanta.dsa.trees.paths;
 import com.manikanta.dsa.trees.BinaryTree.*;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by Manikanta Tummalapenta on 01 Dec 2019
  */
-public class AllPaths {
+public class AllRootToLeafPaths {
 
     private void printAllPaths(Node root, Integer arr[], Integer pathLen) {
         if (null == root) {
@@ -28,6 +27,7 @@ public class AllPaths {
         printAllPaths(root.right, arr, pathLen);
     }
 
+    // Backtracking Approach - Will be useful in other path examples
     private void printAllPaths2(Node root, List<Integer> currNodes) {
         if (null == root) {
             return;
@@ -54,7 +54,7 @@ public class AllPaths {
     }
 
     public static void main(String[] args) {
-        AllPaths allPaths = new AllPaths();
+        AllRootToLeafPaths allRootToLeafPaths = new AllRootToLeafPaths();
 
         Node root = new Node(1);
         root.left = new Node(2);
@@ -62,8 +62,8 @@ public class AllPaths {
         root.left.left = new Node(4);
         root.left.right = new Node(5);
 
-        allPaths.printAllPaths(root, new Integer[1000], 0);
-        allPaths.printAllPaths2(root, new ArrayList<>());
+        allRootToLeafPaths.printAllPaths(root, new Integer[1000], 0);
+        allRootToLeafPaths.printAllPaths2(root, new ArrayList<>());
 
         System.out.println("**************");
 
@@ -81,7 +81,7 @@ public class AllPaths {
         root1.right.right.right.left.right = new Node(12);
         root1.right.right.right.right = new Node(13);
 
-        allPaths.printAllPaths(root1, new Integer[1000], 0);
-        allPaths.printAllPaths2(root1, new ArrayList<>());
+        allRootToLeafPaths.printAllPaths(root1, new Integer[1000], 0);
+        allRootToLeafPaths.printAllPaths2(root1, new ArrayList<>());
     }
 }

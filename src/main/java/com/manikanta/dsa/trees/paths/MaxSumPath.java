@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 /**
  * Created by Manikanta Tummalapenta on 02 Dec 2019
  */
-public class MaxPathSum {
+public class MaxSumPath {
 
     // Can use static variable instead of this but not recommended
     class Res {
@@ -37,7 +37,6 @@ public class MaxPathSum {
         if (null == root) {
             return 0;
         }
-
         if (root.isLeafNode()) {
             return root.data;
         }
@@ -72,7 +71,7 @@ public class MaxPathSum {
     }
 
     public static void main(String[] args) {
-        MaxPathSum maxPathSum = new MaxPathSum();
+        MaxSumPath maxSumPath = new MaxSumPath();
 
         BinaryTree tree = new BinaryTree();
         tree.root = new Node(-15);
@@ -89,7 +88,7 @@ public class MaxPathSum {
         tree.root.right.right.right.right = new Node(-1);
         tree.root.right.right.right.right.left = new Node(10);
         System.out.println("Max pathSum of the given binary tree is "
-                + maxPathSum.leafToLeaf(tree.root));
+                + maxSumPath.leafToLeaf(tree.root));
 
         BinaryTree tree1 = new BinaryTree();
         tree1.root = new Node(10);
@@ -101,6 +100,6 @@ public class MaxPathSum {
         tree1.root.right.right.left = new Node(3);
         tree1.root.right.right.right = new Node(4);
         System.out.println("Max pathSum of the given binary tree is "
-                + maxPathSum.anyToAnyNode(tree1.root));
+                + maxSumPath.anyToAnyNode(tree1.root));
     }
 }
