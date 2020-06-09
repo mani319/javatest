@@ -1,5 +1,8 @@
 package com.manikanta.dsa.matrix;
 
+import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Created by Manikanta Tummalapenta on 04 Dec 2019
  */
@@ -43,10 +46,9 @@ public class Islands {
         return noOfIslands;
     }
 
+    private int rowNbr[] = new int[] { -1, -1, -1, 0, 0, 1, 1, 1 };
+    private int colNbr[] = new int[] { -1, 0, 1, -1, 1, -1, 0, 1 };
     private void findIslandsUtil(int[][] mat, int i, int j, boolean[][] visited) {
-        int rowNbr[] = new int[] { -1, -1, -1, 0, 0, 1, 1, 1 };
-        int colNbr[] = new int[] { -1, 0, 1, -1, 1, -1, 0, 1 };
-
         visited[i][j] = true;
 
         for (int k = 0; k < rowNbr.length; k++) {

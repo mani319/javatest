@@ -50,6 +50,23 @@ public class Flatten {
         return head;
     }
 
+    // https://www.geeksforgeeks.org/flatten-a-multi-level-linked-list-set-2-depth-wise/
+    static Node currTail = null;
+    private static Node flattenMultiLevelDepthWise(Node head) {
+        if (null == head) {
+            return null;
+        }
+
+        currTail = head;
+        Node next = head.next;
+
+        head.next = flattenMultiLevelDepthWise(head.down);
+
+        currTail.next = flattenMultiLevelDepthWise(next);
+
+        return head;
+    }
+
 
     public static void main(String[] args) {
         Flatten flatten = new Flatten();
@@ -113,5 +130,32 @@ public class Flatten {
         linkedList.head = flatten.flattenMultiLevel(linkedList.head);
         linkedList.printList(linkedList.head);
         // Expected Output - 10 5 12 7 11 4 20 13 17 6 2 16 9 8 3 19 15
+
+        Node head=new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+        head.next.down = new Node(7);
+        head.next.down.down = new Node(9);
+        head.next.down.down.down = new Node(14);
+        head.next.down.down.down.down= new Node(15);
+        head.next.down.down.down.down.next= new Node(23);
+        head.next.down.down.down.down.next.down = new Node(24);
+        head.next.down.next = new Node(8);
+        head.next.down.next.down = new Node(16);
+        head.next.down.next.down.down= new Node(17);
+        head.next.down.next.down.down.next= new Node(18);
+        head.next.down.next.down.down.next.next= new Node(19);
+        head.next.down.next.down.down.next.next.next
+                = new Node(20);
+        head.next.down.next.down.down.next.next.next.down
+                = new Node(21);
+        head.next.down.next.next = new Node(10);
+        head.next.down.next.next.down = new Node(11);
+        head.next.down.next.next.next = new Node(12);
+
+        head = flattenMultiLevelDepthWise(head);
+        linkedList.printList(head);
+        // Expected Output - 1 2 7 9 14 15 23 24 8 16 17 18 19 20 21 10 11 12 3 4
     }
 }

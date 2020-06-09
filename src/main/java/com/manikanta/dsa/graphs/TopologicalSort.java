@@ -1,6 +1,9 @@
 package com.manikanta.dsa.graphs;
 
+import org.junit.Assert;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -12,7 +15,7 @@ import java.util.Queue;
  */
 public class TopologicalSort {
 
-    private static void topologicalSort(Graph g) {
+    public static List<Integer> topologicalSort(Graph g) {
         List<Integer> topologicalSort = new ArrayList<>();
 
         // Find inDegree of each Vertex
@@ -55,12 +58,10 @@ public class TopologicalSort {
         // If count of visited is not same as number of nodes, there is a cycle
         if (count != g.V) {
             System.out.println("There exists a cycle in the graph");
-            return;
+            return null;
         }
 
-        for (int node : topologicalSort) {
-            System.out.print(node + " ");
-        }
+        return topologicalSort;
     }
 
     public static void main(String args[]) {
@@ -73,8 +74,8 @@ public class TopologicalSort {
         g.addEdge(4, 1);
         g.addEdge(2, 3);
         g.addEdge(3, 1);
-        System.out.println("Following is a Topological Sort");
-        topologicalSort(g);
 
+        List<Integer> topologicalSort = new ArrayList<>(Arrays.asList(4, 5, 2, 0, 3, 1));
+        Assert.assertEquals(topologicalSort, topologicalSort(g));
     }
 }

@@ -33,8 +33,6 @@ public class SubsetsWithPerfectSum {
             }
         }
 
-        printDPArray(n+1, sum+1);
-
         // To find whether exact sum can be extracted or not - get dp[n][sum]
         if (dp[n][sum]) {
             System.out.println("Exact sum can be found");
@@ -73,17 +71,6 @@ public class SubsetsWithPerfectSum {
         if (arr[i-1] <= sum && dp[i-1][sum-arr[i-1]]) {
             p.add(arr[i-1]);
             printSubsetsRec(arr, i-1, sum-arr[i-1], p);
-        }
-    }
-
-
-    private static void printDPArray(int n, int sum) {
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < sum; j++) {
-                System.out.print(dp[i][j] + " ");
-            }
-            System.out.println();
         }
     }
 

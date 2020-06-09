@@ -1,4 +1,4 @@
-package com.manikanta.dsa.trees;
+package com.manikanta.dsa.trees.relations;
 
 import com.manikanta.dsa.trees.BinaryTree;
 import com.manikanta.dsa.trees.BinaryTree.*;

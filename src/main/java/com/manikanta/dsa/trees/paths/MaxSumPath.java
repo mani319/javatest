@@ -19,9 +19,6 @@ public class MaxSumPath {
         if (null == root) {
             return 0;
         }
-        if (root.isLeafNode()) {
-            return root.data;
-        }
 
         Integer leftSum = leafToLeafUtil(root.left, res);
         Integer rightSum = leafToLeafUtil(root.right, res);
@@ -34,24 +31,16 @@ public class MaxSumPath {
     }
 
     private Integer anyToAnyNodeUtil(Node root, Res res) {
-        if (null == root) {
+        if (root == null) {
             return 0;
         }
-        if (root.isLeafNode()) {
-            return root.data;
-        }
 
-        Integer leftSum = anyToAnyNodeUtil(root.left, res);
-        Integer rightSum = anyToAnyNodeUtil(root.right, res);
+        Integer leftSum = Math.max(0, anyToAnyNodeUtil(root.left, res));
+        Integer rightSum = Math.max(0, anyToAnyNodeUtil(root.right, res));
 
-        Integer a = root.data;
-        Integer b = Math.max(leftSum, rightSum) + root.data;
-        Integer c = leftSum + rightSum + root.data;
+        res.result = Math.max(res.result, leftSum + rightSum + root.data);
 
-        // Store the Maximum Result.
-        res.result = Stream.of(res.result, a, b, c).max(Integer::compareTo).get();
-
-        return Math.max(a, b);
+        return Math.max(leftSum, rightSum) + root.data;
     }
 
     // Ref - https://www.geeksforgeeks.org/find-maximum-path-sum-two-leaves-binary-tree/

@@ -23,7 +23,7 @@ public class DFS {
         }
     }
 
-    private void traverseUtil(Graph g, Integer v, boolean[] visited) {
+    public static void traverseUtil(Graph g, Integer v, boolean[] visited) {
         visited[v] = true;
         System.out.print(v + " ");
 
