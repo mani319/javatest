@@ -8,6 +8,8 @@ import com.manikanta.dsa.trees.BinaryTree.*;
  */
 public class CheckBST {
 
+    // solution by sending MIN_VALUE, MAX_VALUE - Not recommended when there are extreme values in tree.
+
     private boolean isBST1(Node root, Node l, Node r) {
 
         // IMP:- Observe the recursion conditions

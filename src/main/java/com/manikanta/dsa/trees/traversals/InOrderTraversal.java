@@ -28,7 +28,7 @@ public class InOrderTraversal {
         }
     }
 
-    void recursive(Node root) {
+    public static void recursive(Node root) {
         if (null == root) {
             return;
         }
