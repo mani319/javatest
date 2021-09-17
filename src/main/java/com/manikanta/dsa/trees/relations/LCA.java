@@ -8,9 +8,28 @@ import com.manikanta.dsa.trees.BinaryTree.*;
  */
 public class LCA {
 
+    // This works when both nodes are given
+    static BinaryTree.Node lca(BinaryTree.Node root, BinaryTree.Node n1, BinaryTree.Node n2) {
+        if (null == root) {
+            return null;
+        }
+
+        if (n1 == root || n2 == root) {
+            return root;
+        }
+
+        BinaryTree.Node leftLCA = lca(root.left, n1, n2);
+        BinaryTree.Node rightLCA = lca(root.right, n1, n2);
+        if (null != leftLCA && null != rightLCA) {
+            return root;
+        }
+
+        return null == leftLCA ? rightLCA : leftLCA;
+    }
+
     // These are required in the case where it is not sure n1 and n2 always exist
     static boolean n1Exists = false, n2Exists = false;
-    private Node findLCA(Node root, Integer n1, Integer n2) {
+    private Node findLCA(Node root, BinaryTree.Node n1, BinaryTree.Node n2) {
 
         // This is because we are running multiple test cases
         n1Exists = false; n2Exists = false;
@@ -23,16 +42,16 @@ public class LCA {
         return null;
     }
 
-    private Node LCAUtil(Node root, Integer n1, Integer n2) {
+    private Node LCAUtil(Node root, BinaryTree.Node n1, BinaryTree.Node n2) {
         if (null == root)
             return null;
 
         Node temp = null;
-        if (n1 == root.data) {
+        if (n1 == root) {
             n1Exists = true;
             temp = root;
         }
-        if (n2 == root.data) {
+        if (n2 == root) {
             n2Exists = true;
             temp = root;
         }
@@ -61,19 +80,19 @@ public class LCA {
         tree.root.right.left = new Node(6);
         tree.root.right.right = new Node(7);
 
-        Node node = lca.findLCA(tree.root, 4, 5);
+        Node node = lca.findLCA(tree.root, tree.root.left.left, tree.root.left.right);
         if (node != null)
             System.out.println("LCA(4, 5) = " + node.data);
         else
             System.out.println("Keys are not present");
 
-        node = lca.findLCA(tree.root, 4, 10);
+        node = lca.findLCA(tree.root, tree.root.left.left, new Node(10));
         if (node != null)
             System.out.println("LCA(4, 10) = " + node.data);
         else
             System.out.println("Keys are not present");
 
-        node = lca.findLCA(tree.root, 8, 10);
+        node = lca.findLCA(tree.root, new Node(8), new Node(10));
         if (node != null)
             System.out.println("LCA(4, 10) = " + node.data);
         else

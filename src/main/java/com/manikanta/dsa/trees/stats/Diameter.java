@@ -1,7 +1,8 @@
 package com.manikanta.dsa.trees.stats;
 
-import com.manikanta.dsa.trees.BinaryTree.*;
+import com.manikanta.dsa.trees.BinaryTree.Node;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 /**
@@ -20,30 +21,29 @@ public class Diameter {
         Integer lDia = naiveDiameter(root.left);
         Integer rDia = naiveDiameter(root.right);
 
-        return Stream.of(lDia, rDia, lHei+rHei+1).max(Integer::compareTo).get();
+        return Stream.of(lDia, rDia, lHei + rHei + 1).max(Integer::compareTo).get();
     }
 
     // Ref - https://www.geeksforgeeks.org/diameter-of-a-binary-tree-in-on-a-new-method/
-    // Modified by using static var here
-    private static Integer diameter;
     private Integer optimisedDiameter(Node root) {
-        diameter = 0;
-        optimisedDiameterUtil(root);
+        AtomicInteger diameter = new AtomicInteger(0);
 
-        return diameter;
+        heightCalc(root, diameter);
+
+        return diameter.get();
     }
 
-    private Integer optimisedDiameterUtil(Node root) {
+    private Integer heightCalc(Node root, AtomicInteger diameter) {
         if (null == root) {
             return 0;
         }
 
-        Integer lHei = optimisedDiameterUtil(root.left);
-        Integer rHei = optimisedDiameterUtil(root.right);
+        Integer lHei = heightCalc(root.left, diameter);
+        Integer rHei = heightCalc(root.right, diameter);
 
-        diameter = Math.max(diameter, lHei+rHei+1);
+        diameter.set(Math.max(diameter.get(), lHei + rHei + 1));
 
-        return Math.max(lHei, rHei) +1;
+        return Math.max(lHei, rHei) + 1;
     }
 
 

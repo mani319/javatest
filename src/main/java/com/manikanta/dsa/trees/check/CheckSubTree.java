@@ -48,6 +48,7 @@ public class CheckSubTree {
         inorder(tree, first);
         inorder(subtree, second);
 
+        // TODO: Correct the implementation using string and ! condition
         if (first.toString().contains(second.toString())) {
             return false;
         }
