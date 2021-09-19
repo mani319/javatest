@@ -1,11 +1,9 @@
 package com.manikanta.dsa.trees.paths;
 
-import com.manikanta.dsa.trees.BinaryTree.*;
+import com.manikanta.dsa.trees.BinaryTree.Node;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Created by Manikanta Tummalapenta on 01 Dec 2019
@@ -39,10 +37,10 @@ public class AllRootToLeafPaths {
 
         if (root.isLeafNode()) {
             System.out.println(currNodes);
-        } else {
-            printAllPaths2(root.left, currNodes);
-            printAllPaths2(root.right, currNodes);
         }
+
+        printAllPaths2(root.left, currNodes);
+        printAllPaths2(root.right, currNodes);
 
         // Back tracking move
         currNodes.remove(currNodes.size() - 1);
