@@ -51,7 +51,7 @@ public class MaxSumPath {
         return res.result;
     }
 
-    // Ref - https://www.geeksforgeeks.org/find-maximum-path-sum-in-a-binary-tree/
+    // Ref - https://leetcode.com/problems/binary-tree-maximum-path-sum/discuss/39775/Accepted-short-solution-in-Java
     private Integer anyToAnyNode(Node root) {
         Res res = new Res();
         res.result = Integer.MIN_VALUE;
@@ -90,5 +90,19 @@ public class MaxSumPath {
         tree1.root.right.right.right = new Node(4);
         System.out.println("Max pathSum of the given binary tree is "
                 + maxSumPath.anyToAnyNode(tree1.root));
+
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(10);
+        root.left.left = new Node(-1);
+        root.left.right = new Node(-4);
+        root.right.left = new Node(-5);
+        root.right.right = new Node(-6);
+        root.left.right.left = new Node(4);
+        root.right.left.left = new Node(7);
+        root.right.left.right = new Node(4);
+        root.right.left.left.right = new Node(-2);
+        System.out.println("Max pathSum of the given binary tree 2 is "
+                + maxSumPath.anyToAnyNode(root));
     }
 }
