@@ -1,6 +1,6 @@
 package com.manikanta.dsa.arrays;
 
-import com.manikanta.dsa.monotonic.IncreasingMonotonicQueue;
+import com.manikanta.dsa.monotonic.MonotonicQueue;
 
 import java.util.Stack;
 
@@ -46,15 +46,15 @@ public class LargestRectangularAreaInHistogram {
         int n = arr.length;
 
         // Default is -1 for left to right. because 0 is starting index
-        IncreasingMonotonicQueue leftToRightMQ = new IncreasingMonotonicQueue(n, -1);
+        MonotonicQueue leftToRightMQ = new MonotonicQueue(n, -1);
         for (int i = 0; i < n; i++) {
-            leftToRightMQ.push(new IncreasingMonotonicQueue.Item(arr[i], i));
+            leftToRightMQ.pushIncreasingForNearest(new MonotonicQueue.Item(arr[i], i));
         }
 
         // Default is n for right to left. because n-1 is ending index
-        IncreasingMonotonicQueue rightToLeftMQ = new IncreasingMonotonicQueue(n, n);
+        MonotonicQueue rightToLeftMQ = new MonotonicQueue(n, n);
         for (int i = n-1; i >= 0; i--) {
-            rightToLeftMQ.push(new IncreasingMonotonicQueue.Item(arr[i], i));
+            rightToLeftMQ.pushIncreasingForNearest(new MonotonicQueue.Item(arr[i], i));
         }
 
         // Find left nearest and right nearest for each elem which gives width.
