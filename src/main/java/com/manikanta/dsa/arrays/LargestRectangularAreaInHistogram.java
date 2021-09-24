@@ -1,5 +1,7 @@
 package com.manikanta.dsa.arrays;
 
+import com.manikanta.dsa.monotonic.IncreasingMonotonicQueue;
+
 import java.util.Stack;
 
 /**
@@ -39,8 +41,37 @@ public class LargestRectangularAreaInHistogram {
         return Math.max(largestArea, areaWithTopAsSmall);
     }
 
+    // Ref - https://1e9.medium.com/monotonic-queue-notes-980a019d5793
+    public static Integer getLargestAreaUsingMonotonicQueue(int[] arr) {
+        int n = arr.length;
+
+        // Default is -1 for left to right. because 0 is starting index
+        IncreasingMonotonicQueue leftToRightMQ = new IncreasingMonotonicQueue(n, -1);
+        for (int i = 0; i < n; i++) {
+            leftToRightMQ.push(new IncreasingMonotonicQueue.Item(arr[i], i));
+        }
+
+        // Default is n for right to left. because n-1 is ending index
+        IncreasingMonotonicQueue rightToLeftMQ = new IncreasingMonotonicQueue(n, n);
+        for (int i = n-1; i >= 0; i--) {
+            rightToLeftMQ.push(new IncreasingMonotonicQueue.Item(arr[i], i));
+        }
+
+        // Find left nearest and right nearest for each elem which gives width.
+        int maxArea = 0;
+        for (int i = 0; i < n; i++) {
+            int width = rightToLeftMQ.nearest[i] - leftToRightMQ.nearest[i] - 1;
+            int currArea = width * arr[i];
+
+            maxArea = Math.max(maxArea, currArea);
+        }
+
+        return maxArea;
+    }
+
     public static void main(String[] args) {
         int hist[] = {6, 2, 5, 4, 5, 1, 6};
-        System.out.println(LargestRectangularAreaInHistogram.largestArea(hist));
+        System.out.println(largestArea(hist));
+        System.out.println(getLargestAreaUsingMonotonicQueue(hist));
     }
 }
