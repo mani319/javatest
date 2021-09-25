@@ -6,11 +6,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * Created by Manikanta Tummalapenta on 24/09/21
+ * Created by Manikanta Tummalapenta on 25/09/21
  */
-@Data
-public class MonotonicQueue {
-    // Use this when we need smaller value on left/right side of current
+public class DecreasingMonotonicQueue {
 
     @Data
     public static class Item {
@@ -22,34 +20,26 @@ public class MonotonicQueue {
         }
     }
 
-    Deque<Item> q;
+    Deque<DecreasingMonotonicQueue.Item> q;
     public int[] nearest;
-    public int[] overall;
     int defaultNearestValue;
 
-    public MonotonicQueue(int n, int defaultNearestValue) {
+    public DecreasingMonotonicQueue(int n, int defaultNearestValue) {
         this.q = new ArrayDeque<>();
         this.nearest = new int[n];
         this.defaultNearestValue = defaultNearestValue;
     }
 
-    public void pushIncreasingForNearest(Item item) {
-        // Pop while queue's top is greater
-        while (!q.isEmpty() && q.peekLast().val >= item.val) {
+    public void push(DecreasingMonotonicQueue.Item item) {
+        // Pop while queue's top is lesser
+        while (!q.isEmpty() && q.peekLast().val <= item.val) {
             q.removeLast();
-        }
-
-        // If queue is empty, make nearest as default. Else which ever is on top.
-        if (q.isEmpty()) {
-            nearest[item.ind] = defaultNearestValue;
-        } else {
-            nearest[item.ind] = q.peekLast().ind;
         }
 
         q.addLast(item);
     }
 
-    public void pushDecreasingForNearest(Item item) {
+    public void pushForNearest(DecreasingMonotonicQueue.Item item) {
         // Pop while queue's top is lesser
         while (!q.isEmpty() && q.peekLast().val <= item.val) {
             q.removeLast();
@@ -65,7 +55,7 @@ public class MonotonicQueue {
         q.addLast(item);
     }
 
-    public void pushDecreasingForOverall(Item item) {
+    public void pushForOverall(DecreasingMonotonicQueue.Item item) {
         // Pop while queue's top is lesser
         while (!q.isEmpty() && q.peekLast().val <= item.val) {
             q.removeLast();
@@ -81,5 +71,15 @@ public class MonotonicQueue {
         if (q.isEmpty()) {
             q.addLast(item);
         }
+    }
+
+    public void popIfSame(int num) {
+        if (!q.isEmpty() && num == q.peek().val) {
+            q.pop();
+        }
+    }
+
+    public Item getMax() {
+        return q.peek();
     }
 }

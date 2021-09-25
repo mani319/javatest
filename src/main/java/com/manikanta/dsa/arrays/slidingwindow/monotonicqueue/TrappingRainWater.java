@@ -1,8 +1,7 @@
-package com.manikanta.dsa.arrays;
+package com.manikanta.dsa.arrays.slidingwindow.monotonicqueue;
 
-import com.manikanta.dsa.monotonic.MonotonicQueue;
-
-import java.util.Arrays;
+import com.manikanta.dsa.monotonic.DecreasingMonotonicQueue;
+import com.manikanta.dsa.monotonic.IncreasingMonotonicQueue;
 
 /**
  * Created by Manikanta Tummalapenta on 24/09/21
@@ -14,15 +13,15 @@ public class TrappingRainWater {
         int n = height.length;
 
         // leftToRight pushIncreasing - insert max on left for each curr
-        MonotonicQueue leftToRightMQ = new MonotonicQueue(n, -1);
+        DecreasingMonotonicQueue leftToRightMQ = new DecreasingMonotonicQueue(n, -1);
         for (int i = 0; i < n; i++) {
-            leftToRightMQ.pushDecreasingForOverall(new MonotonicQueue.Item(height[i], i));
+            leftToRightMQ.pushForOverall(new DecreasingMonotonicQueue.Item(height[i], i));
         }
 
         // rightToLeft pushIncreasing - insert max on right for each curr
-        MonotonicQueue rightToLeftMQ = new MonotonicQueue(n, n);
+        DecreasingMonotonicQueue rightToLeftMQ = new DecreasingMonotonicQueue(n, n);
         for (int i = n - 1; i >= 0; i--) {
-            rightToLeftMQ.pushDecreasingForOverall(new MonotonicQueue.Item(height[i], i));
+            rightToLeftMQ.pushForOverall(new DecreasingMonotonicQueue.Item(height[i], i));
         }
 
         // Min(leftMax, rightMax) - currHeight is water trapped at each height.
@@ -39,7 +38,7 @@ public class TrappingRainWater {
     public static void main(String[] args) {
         int[] h = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
         System.out.println(trap(h));
-        int[] h1 = {4,2,0,3,2,5};
+        int[] h1 = {4, 2, 0, 3, 2, 5};
         System.out.println(trap(h1));
     }
 }

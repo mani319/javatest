@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Created by Manikanta Tummalapenta on 24/09/21
  */
-public class KDistinctLongSubstr {
+public class LongSubstrKDistinct {
 
     public static String findLongestSubstring(String str, int k) {
         if (str == null || str.length() == 0) {
@@ -24,7 +24,8 @@ public class KDistinctLongSubstr {
 
             // Move start till unique == k.
             while (unique.size() > k) {
-                if (--charCount[str.charAt(start)] == 0) {
+                charCount[str.charAt(start)]--;
+                if (charCount[str.charAt(start)] == 0) {
                     unique.remove(str.charAt(start));
                 }
                 start++;
