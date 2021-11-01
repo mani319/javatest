@@ -31,7 +31,7 @@ public class DecreasingMonotonicQueue {
     }
 
     public void push(DecreasingMonotonicQueue.Item item) {
-        // Pop while queue's top is lesser
+        // Pop while queue's last is lesser - kind of stack
         while (!q.isEmpty() && q.peekLast().val <= item.val) {
             q.removeLast();
         }
@@ -40,7 +40,7 @@ public class DecreasingMonotonicQueue {
     }
 
     public void pushForNearest(DecreasingMonotonicQueue.Item item) {
-        // Pop while queue's top is lesser
+        // Pop while queue's last is lesser
         while (!q.isEmpty() && q.peekLast().val <= item.val) {
             q.removeLast();
         }

@@ -178,9 +178,7 @@ public class Test {
         atomicInteger.set(a1 + a2);
         System.out.println(atomicInteger1);
 
-        Stack<Character> st = new Stack<>();
-        st.pop();
-        st.peek();
+
         PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> o1 - o2);
         pq.poll();
 
@@ -203,6 +201,16 @@ public class Test {
         System.out.println((long) ab);
 
         AtomicInteger integer = new AtomicInteger(0);
+        System.out.println("-------- Print Evens ----------");
+        printEvent(0);
+    }
+
+    public static void printEvent(int i) {
+        if (i > 100) {
+            return;
+        }
+        System.out.println(i);
+        printEvent(i+2);
     }
 
     public static <T> List<T> nullSafeCollection(Collection<T> c){
