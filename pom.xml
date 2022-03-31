@@ -34,7 +34,7 @@
         <dependency>
             <artifactId>spring-beans</artifactId>
             <groupId>org.springframework</groupId>
-            <version>5.1.5.RELEASE</version>
+            <version>5.3.18</version>
         </dependency>
 
         <dependency>
